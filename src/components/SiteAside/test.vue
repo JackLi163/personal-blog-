@@ -1,23 +1,22 @@
 <template>
   <div class="test-container">
-    <Empty />
+    <SiteAside />
   </div>
 </template>
 
 <script>
-import Empty from "./";
+import SiteAside from "./";
 export default {
   components: {
-    Empty,
+    SiteAside,
   },
 };
 </script>
 
 <style lang="less" scoped>
 .test-container {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  border: 1px solid #ccc;
+  height: 100vh;
+  width: 300px;
+  margin: 0 auto;
 }
 </style>

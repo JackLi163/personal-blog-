@@ -1,0 +1,101 @@
+<template>
+  <ul class="menu-container">
+    <li v-for="(item, i) in list" :key="i">
+      <RouterLink
+        class="a"
+        :to="{ name: item.name }"
+        :exact="item.exact"
+        active-class="selected"
+        exact-active-class=""
+      >
+        <Icon :type="item.icon" />
+        <span>{{ item.text }}</span>
+      </RouterLink>
+    </li>
+  </ul>
+</template>
+
+<script>
+import Icon from "@/components/Icon";
+export default {
+  components: {
+    Icon,
+  },
+  data() {
+    return {
+      list: [
+        {
+          name: "Home",
+          text: "首页",
+          icon: "home",
+          exact: true,
+        },
+        {
+          name: "Blog",
+          text: "文章",
+          icon: "blog",
+          exact: false,
+        },
+        {
+          name: "About",
+          text: "关于我",
+          icon: "about",
+          exact: true,
+        },
+        {
+          name: "Project",
+          text: "项目&效果",
+          icon: "code",
+          exact: true,
+        },
+        {
+          name: "Message",
+          text: "留言板",
+          icon: "chat",
+          exact: true,
+        },
+      ],
+    };
+  },
+  // methods: {
+  //   UpdataSelectUrl(item) {
+  //     const pathname = location.pathname.toLowerCase();
+  //     const newpathname = item.url;
+  //     if (item.isblog) {
+  //       return pathname.startsWith(newpathname);
+  //     } else if (newpathname === pathname) {
+  //       return true;
+  //     }
+  //   },
+  // },
+};
+</script>
+
+<style lang="less" scoped>
+@import "~@/styles/var.less";
+.menu-container {
+  margin: 24px 0;
+  li {
+    cursor: pointer;
+    font-size: 18px;
+    color: @lightWords;
+    height: 42px;
+    line-height: 42px;
+    .icon-container {
+      margin: 0 5px;
+    }
+    &:hover,
+    a:hover {
+      color: #fff;
+    }
+    .a {
+      white-space: nowrap;
+      padding: 0 50px;
+      display: block;
+      &.selected {
+        background: #2f2f2f;
+      }
+    }
+  }
+}
+</style>

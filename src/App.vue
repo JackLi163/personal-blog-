@@ -1,3 +1,33 @@
 <template>
-  <h1>根组件</h1>
+  <div class="app-container">
+    <Layout>
+      <template #left>
+        <SiteAside />
+      </template>
+      <div class="main">
+        <router-view></router-view>
+      </div>
+      <template #right>
+        <div class="right"></div>
+      </template>
+    </Layout>
+  </div>
 </template>
+
+<script>
+import Layout from "@/components/Layout";
+import SiteAside from "@/components/SiteAside";
+export default {
+  components: {
+    Layout,
+    SiteAside,
+  },
+};
+</script>
+
+<style>
+.app-container {
+  height: 100vh;
+  background: red;
+}
+</style>

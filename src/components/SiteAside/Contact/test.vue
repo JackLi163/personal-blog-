@@ -1,23 +1,24 @@
 <template>
   <div class="test-container">
-    <Empty />
+    <Contact />
   </div>
 </template>
 
 <script>
-import Empty from "./";
+import Contact from "./";
+import "@/styles/globel.less";
 export default {
   components: {
-    Empty,
+    Contact,
   },
 };
 </script>
 
 <style lang="less" scoped>
 .test-container {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  border: 1px solid #ccc;
+  margin-top: 100px;
+  background: #000;
+  width: 220px;
+  height: 300px;
 }
 </style>

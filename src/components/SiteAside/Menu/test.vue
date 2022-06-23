@@ -1,23 +1,24 @@
 <template>
   <div class="test-container">
-    <Empty />
+    <Menu />
   </div>
 </template>
 
 <script>
-import Empty from "./";
+import Menu from "./";
+import "@/styles/globel.less";
 export default {
   components: {
-    Empty,
+    Menu,
   },
 };
 </script>
 
 <style lang="less" scoped>
 .test-container {
-  position: relative;
   width: 200px;
-  height: 200px;
-  border: 1px solid #ccc;
+  height: 500px;
+  margin: 100px auto;
+  background: #000;
 }
 </style>
