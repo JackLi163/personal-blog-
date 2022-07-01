@@ -4,6 +4,7 @@ import "./styles/globel.less"; //公共样式
 import router from "./router"; //路由库
 import { showMessage } from "./utils"; //工具库
 import "./mock";
+import "./directives/loading"; //自定义指令loading全局注册
 
 Vue.prototype.$showMessage = showMessage;
 

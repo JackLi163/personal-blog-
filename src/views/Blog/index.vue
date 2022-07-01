@@ -1,9 +1,27 @@
 <template>
-  <div class="blog-container">文章</div>
+  <div class="blog-container">
+    <Layout>
+      <BlogList />
+      <template #right> <BlogCategory /> </template>
+    </Layout>
+  </div>
 </template>
 
 <script>
-export default {};
+import Layout from "@/components/Layout";
+import BlogList from "./components/BlogList";
+import BlogCategory from "./components/BlogCategory";
+export default {
+  components: {
+    Layout,
+    BlogList,
+    BlogCategory,
+  },
+};
 </script>
 
-<style></style>
+<style lang="less" scoped>
+.blog-container {
+  height: 100%;
+}
+</style>

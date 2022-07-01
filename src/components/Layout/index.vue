@@ -22,7 +22,7 @@ export default {};
   display: flex;
   height: @height;
   .left,
-  .rigth {
+  .right {
     flex: 0 0 auto;
     overflow: hidden;
   }

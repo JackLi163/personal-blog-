@@ -25,9 +25,11 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less" scoped>
 .app-container {
   height: 100vh;
-  background: red;
+  .main {
+    height: 100%;
+  }
 }
 </style>

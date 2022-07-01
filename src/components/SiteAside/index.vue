@@ -26,7 +26,7 @@ export default {
 <style lang="less" scoped>
 @import "~@/styles/var.less";
 .site-aside-container {
-  widows: 100%;
+  width: 100%;
   height: 100%;
   background: linear-gradient(to bottom, @dark / 2, @words / 2);
   overflow-y: auto;
