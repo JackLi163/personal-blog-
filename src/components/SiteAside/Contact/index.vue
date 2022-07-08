@@ -2,37 +2,39 @@
   <div class="contact-container">
     <a>
       <Icon type="github" />
-      <span>Jack</span>
+      <span>{{ data.githubName }}</span>
     </a>
-    <a href="mailto:liweijie9988@163.com">
+    <a :href="`mailto:${data.mail}`">
       <Icon type="mail" />
-      <span>liweijie9988@163.com</span>
+      <span>{{ data.mail }}</span>
     </a>
     <a>
       <div class="pop">
-        <img src="@/assets/Contact/weixin.jpg" alt="" />
+        <img :src="data.weixinQrCode" alt="" />
       </div>
       <Icon type="weixin" class="weixin" />
-      <span>16620026028</span>
+      <span>{{ data.weixin }}</span>
     </a>
     <a
-      href="tencent://message/?Menu=yes&uin=1146957654&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45"
+      :href="`tencent://message/?Menu=yes&uin=${data.qq}&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45`"
     >
       <div class="pop">
-        <img src="@/assets/Contact/qq.jpg" alt="" />
+        <img :src="data.qqQrCode" alt="" />
       </div>
       <Icon type="qq" />
-      <span>1146957654</span>
+      <span>{{ data.qq }}</span>
     </a>
   </div>
 </template>
 
 <script>
 import Icon from "@/components/Icon";
+import { mapState } from "vuex";
 export default {
   components: {
     Icon,
   },
+  computed: mapState("setting", { data: "data" }),
 };
 </script>
 
@@ -45,16 +47,16 @@ a {
   position: relative;
   display: block;
   color: @lightWords;
-  padding: 8px 0 8px 25px;
+  padding: 8px 2px 8px 13px;
   width: 100%;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   .icon-container {
-    font-size: 22px;
+    font-size: 20px;
     vertical-align: -3px;
     margin-right: 5px;
     &.weixin {
-      font-size: 28px;
+      font-size: 23px;
       margin-left: -2px;
     }
   }

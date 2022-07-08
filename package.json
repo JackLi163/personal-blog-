@@ -13,7 +13,8 @@
     "test:Contact": "vue serve ./src/components/SiteAside/Contact/test.vue",
     "test:Menu": "vue serve ./src/components/SiteAside/Menu/test.vue",
     "test:SiteAside": "vue serve ./src/components/SiteAside/test.vue",
-    "test:Layout": "vue serve ./src/components/Layout/test.vue"
+    "test:Layout": "vue serve ./src/components/Layout/test.vue",
+    "test:MessageArea": "vue serve ./src/components/MessageArea/test.vue"
   },
   "dependencies": {
     "axios": "^0.24.0",

@@ -1,4 +1,4 @@
-import Mock, { Random } from "mockjs";
+import Mock from "mockjs";
 import qs from "querystring";
 // 获取所有博客分类;
 Mock.mock("/api/blogtype", "get", {
@@ -20,7 +20,7 @@ Mock.mock(/^\/api\/blog(\?+.*)*$/, "get", function (options) {
     code: 0,
     msg: "",
     data: {
-      "total|200-1000": 1,
+      total: 1000,
       [`rows|${query.limit}`]: [
         {
           id: "@guid",
@@ -32,7 +32,7 @@ Mock.mock(/^\/api\/blog(\?+.*)*$/, "get", function (options) {
           },
           "scanNumber|5-30": 10,
           "commentNumber|10-30": 30,
-          "thumb|1": ['@image("180x150", "#02adea", "Hello")', null],
+          "thumb|1": ["@image('180x150', '@color','@color','@province' )"],
           createDate: '@date("T")',
         },
       ],
@@ -287,7 +287,7 @@ Mock.mock("/api/comment", "post", function (options) {
       id: " @guid",
       nickname: "@cname",
       content,
-      createDate: Date.now(),
+      createDate: new Date().getTime(),
       "avatar|1": [
         "https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar6.jpg",
         "https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar4.jpg",
@@ -299,20 +299,19 @@ Mock.mock("/api/comment", "post", function (options) {
 });
 
 //获取分页评论
-Mock.mock(/^\/api\/comment(\?[^\/?]+)?&/, "get", function (options) {
+Mock.mock(/^\/api\/comment(\?[^\/?]+)?$/, "get", function (options) {
   const query = qs.parse(options.url);
-  console.log(options.url);
   return Mock.mock({
     code: 0,
     msg: "",
     data: {
-      "total|500-2000": 1, //总数
+      total: 52, //总数
       [`rows|${query.limit}`]: [
         //当前页列表数据
         {
           id: "@guid",
           nickname: "@cname",
-          content: "@cparagraph(10,100)",
+          content: "@cparagraph(5,20)",
           blog: {
             "id|+1": 1, // 博客id
             title: "@ctitle(2, 10)",

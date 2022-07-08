@@ -1,8 +1,11 @@
 <template>
   <div class="detail-container" v-loading="isloading">
     <Layout>
-      <div class="main" v-if="data"><BlogDetail :data="data" /></div>
-      <template #right v-if="data">
+      <div class="main" ref="mainContainer">
+        <BlogDetail :data="data" v-if="!isloading" />
+        <BlogComment v-if="!isloading" id="comment" />
+      </div>
+      <template #right v-if="!isloading">
         <div class="right"><BlogTOC :data="data" /></div>
       </template>
     </Layout>
@@ -13,24 +16,55 @@
 import Layout from "@/components/Layout";
 import BlogDetail from "./components/BlogDetail";
 import BlogTOC from "./components/BlogTOC";
+import BlogComment from "./components/BlogComment";
 import { getBlog } from "@/api/blog";
+import mainScroll from "@/mixins/mainScroll";
+import { titleController } from "@/utils";
 export default {
   data() {
     return {
       isloading: true,
-      data: null,
+      data: {
+        id: "",
+        category: "",
+      },
     };
   },
   components: {
     Layout,
     BlogDetail,
     BlogTOC,
+    BlogComment,
   },
   //加载远程数据
   async created() {
     this.data = await getBlog(this.$route.params);
     this.isloading = false;
+    titleController.setRouteTitle(this.data.title);
   },
+  mixins: [mainScroll("mainContainer")],
+  /* mounted() {
+    // 当vue挂载后，绑定滚动条事件
+    this.$refs.mainContainer.addEventListener("scroll", this.handlerScroll);
+    this.$Bus.$on("setMainScroll", this.onTop);
+  },
+  beforeDestroy() {
+    //当组件销毁时候取消事件绑定
+    this.$refs.mainContainer.removeEventListener("scroll", this.handlerScroll);
+    //当组件销毁时候给其他组件传递一个undefined参数过去吧，表示组件销毁
+    this.$Bus.$emit("mainScroll");
+    this.$Bus.$off("setMainScroll", this.onTop);
+  },
+
+  methods: {
+    //当运行该函数的时候运行事件总线里面绑定的事件函数
+    handlerScroll() {
+      this.$Bus.$emit("mainScroll", this.$refs.mainContainer);
+    },
+    onTop(scrollNumber) {
+      this.$refs.mainContainer.scrollTop = scrollNumber;
+    },
+  }, */
 };
 </script>
 

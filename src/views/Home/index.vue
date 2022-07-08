@@ -1,10 +1,5 @@
 <template>
-  <div
-    v-loading="isloading"
-    class="home-container"
-    ref="container"
-    @wheel="handleWheel"
-  >
+  <div v-loading="isloading" class="home-container" ref="container" @wheel="handleWheel">
     <ul
       :style="{
         marginTop,
@@ -21,19 +16,11 @@
       </li>
     </ul>
     <!-- 向上翻页 -->
-    <div
-      v-show="isShow && index > 0"
-      class="arrow-up arrow"
-      @click="changeIndexNumber(index - 1)"
-    >
+    <div v-show="index > 0" class="arrow-up arrow" @click="changeIndexNumber(index - 1)">
       <Icon type="arrowUp" />
     </div>
     <!-- 向下翻页 -->
-    <div
-      v-show="isShow && index < maxIndex - 1"
-      class="arrow-down arrow"
-      @click="changeIndexNumber(index + 1)"
-    >
+    <div v-show="index < data.length - 1" class="arrow-down arrow" @click="changeIndexNumber(index + 1)">
       <Icon type="arrowDown" />
     </div>
     <!-- 生成指示器 -->
@@ -49,16 +36,14 @@
 </template>
 
 <script>
-import banner from "@/api/banner";
 import Icon from "@/components/Icon";
 import Carouselitem from "./Carouselitem";
-import mixin from "@/mixins/fetchData";
+import { mapState } from "vuex";
 export default {
   components: {
     Carouselitem,
     Icon,
   },
-  mixins: [mixin([])],
   data() {
     return {
       index: 0,
@@ -70,6 +55,10 @@ export default {
     marginTop() {
       return -this.index * this.containerHeight + "px"; //改变margin-top的值
     },
+    ...mapState("banner", ["isloading", "data"]), //获取仓库数据
+  },
+  created() {
+    this.$store.dispatch("banner/fetchBanner"); //运行仓库函数
   },
   mounted() {
     //计算最外层容器的高度
@@ -82,11 +71,6 @@ export default {
     window.removeEventListener("resize", this.handleResize);
   },
   methods: {
-    // 远程加载数据
-    async fetchData() {
-      return await banner();
-    },
-
     changeIndexNumber(newIndex) {
       this.index = newIndex; //将新的index值赋值给原来的index
     },
@@ -107,10 +91,8 @@ export default {
         this.index < 0 ? (this.index = 0) : (this.switching = true);
       } else if (e.deltaY > 20) {
         this.index++;
-        //判读index值是否大于maxindex，若是的话将index置为maxindex，若不是则将锁开启，约束滚轮事件
-        this.index > this.maxIndex - 1
-          ? (this.index = this.maxIndex - 1)
-          : (this.switching = true);
+        //判读index值是否大于data.length，若是的话将index置为data.length，若不是则将锁开启，约束滚轮事件
+        this.index > this.data.length - 1 ? (this.index = this.data.length - 1) : (this.switching = true);
       }
     },
   },

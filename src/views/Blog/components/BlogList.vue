@@ -1,6 +1,6 @@
 <template>
   <div class="blog-list-container" v-loading="isloading" ref="container">
-    <ul>
+    <ul :style="{ opacity: isloading ? 0 : 1 }">
       <li v-for="item in data.rows" :key="item.id">
         <routerLink
           :to="{
@@ -10,8 +10,7 @@
             },
           }"
           class="thumb"
-          v-if="item.thumb"
-          ><img :src="item.thumb"
+          ><img v-lazy="item.thumb"
         /></routerLink>
         <div class="main">
           <routerLink
@@ -47,22 +46,18 @@
         </div>
       </li>
     </ul>
-    <Pager
-      :current="routeInfo.page"
-      :total="data.total"
-      :limit="routeInfo.limit"
-      @pageChange="handlePageChange"
-    />
+    <Pager :current="routeInfo.page" :total="data.total" :limit="routeInfo.limit" @pageChange="handlePageChange" />
   </div>
 </template>
 
 <script>
 import mixin from "@/mixins/fetchData";
+import mainScroll from "@/mixins/mainScroll";
 import * as blog from "@/api/blog";
 import { format } from "@/utils";
 import Pager from "@/components/Pager";
 export default {
-  mixins: [mixin({})],
+  mixins: [mixin({}), mainScroll("container")],
   components: {
     Pager,
   },
@@ -125,6 +120,7 @@ export default {
   overflow-y: scroll;
   scroll-behavior: smooth;
   ul {
+    transition: 0.5s;
     li {
       display: flex;
       padding: 15px 0;

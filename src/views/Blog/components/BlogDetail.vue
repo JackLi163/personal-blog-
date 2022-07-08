@@ -4,7 +4,7 @@
     <div class="aside">
       <span class="date">日期:{{ utils(data.createDate) }}</span>
       <span class="browse">浏览:{{ data.scanNumber }}</span>
-      <a href="" class="comments">评论:{{ data.commentNumber }}</a>
+      <a href="#comment" class="comments">评论:{{ data.commentNumber }}</a>
       <router-link
         class="catagor"
         :to="{

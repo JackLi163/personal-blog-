@@ -55,10 +55,7 @@ export default {
     },
     // 对远程数据进行处理
     list() {
-      const totalArticleCount = this.data.reduce(
-        (a, b) => a + b.articleCount,
-        0
-      );
+      const totalArticleCount = this.data.reduce((a, b) => a + b.articleCount, 0);
 
       const result = [
         {

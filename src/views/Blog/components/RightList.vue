@@ -2,11 +2,7 @@
   <ul class="right-list-container">
     <li v-for="(item, i) in list" :key="i" @click.stop="handleClick(item)">
       <span :class="{ selected: item.isSelected }">{{ item.name }}</span>
-      <span
-        v-if="item.articleCount"
-        :class="{ selected: item.isSelected, countNumber: true }"
-        >{{ item.articleCount }}</span
-      >
+      <span :class="{ selected: item.isSelected, countNumber: true }">{{ item.articleCount }}</span>
       <!-- 递归该组件 -->
       <RightList :list="item.children" @select="handleClick" />
     </li>
