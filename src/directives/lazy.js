@@ -13,11 +13,17 @@ function setImgs() {
     //当元素在视口中的时候加载图片
     if (rect.top + rect.height > 0 && rect.top < document.documentElement.clientHeight) {
       //新建一个临时图片来判断图片是否加载完成
-      const tempImg = new Image();
-      tempImg.onload = () => {
-        img.dom.src = img.url;
-      };
-      tempImg.src = img.url;
+
+      if (img.url === null) {
+        img.dom.src = "";
+      } else {
+        const tempImg = new Image();
+        tempImg.onload = () => {
+          img.dom.src = img.url;
+        };
+        tempImg.src = img.url;
+      }
+
       // 将加载过得图片元素从数组中移除
       imgs = imgs.filter((i) => i !== img);
     }

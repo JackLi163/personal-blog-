@@ -2,11 +2,11 @@
   <div class="detail-container" v-loading="isloading">
     <Layout>
       <div class="main" ref="mainContainer">
-        <BlogDetail :data="data" v-if="!isloading" />
-        <BlogComment v-if="!isloading" id="comment" />
+        <BlogDetail :data="data" v-if="data && !isloading" />
+        <BlogComment v-if="data && !isloading" id="comment" />
       </div>
       <template #right v-if="!isloading">
-        <div class="right"><BlogTOC :data="data" /></div>
+        <div class="right" v-if="data"><BlogTOC :data="data" /></div>
       </template>
     </Layout>
   </div>
@@ -38,8 +38,13 @@ export default {
   },
   //加载远程数据
   async created() {
-    this.data = await getBlog(this.$route.params);
+    this.data = await getBlog(this.$route.params.id);
     this.isloading = false;
+    if (!this.data) {
+      console.log(1);
+      this.$router.push("/404");
+      return;
+    }
     titleController.setRouteTitle(this.data.title);
   },
   mixins: [mainScroll("mainContainer")],

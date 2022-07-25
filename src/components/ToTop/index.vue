@@ -69,5 +69,6 @@ export default {
   bottom: 20px;
   cursor: pointer;
   transition: 0.5s;
+  box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 </style>

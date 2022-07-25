@@ -16,31 +16,32 @@ Mock.mock("/api/blogtype", "get", {
 // 分页获取博客;
 Mock.mock(/^\/api\/blog(\?+.*)*$/, "get", function (options) {
   const query = qs.parse(options.url);
+  const data = {
+    total: 1000,
+    [`rows|${query.limit}`]: [
+      {
+        id: "@guid",
+        title: "@ctitle(2, 10)",
+        description: "@cparagraph(1,10)",
+        category: {
+          "id|1-50": 1,
+          name: "分类@id",
+        },
+        "scanNumber|5-30": 10,
+        "commentNumber|10-30": 30,
+        "thumb|1": ["@image('180x150', '@color','@color','@province' )", null],
+        createDate: '@date("T")',
+      },
+    ],
+  };
   return Mock.mock({
     code: 0,
     msg: "",
-    data: {
-      total: 1000,
-      [`rows|${query.limit}`]: [
-        {
-          id: "@guid",
-          title: "@ctitle(2, 10)",
-          description: "@cparagraph(1,10)",
-          category: {
-            "id|1-50": 1,
-            name: "分类@id",
-          },
-          "scanNumber|5-30": 10,
-          "commentNumber|10-30": 30,
-          "thumb|1": ["@image('180x150', '@color','@color','@province' )"],
-          createDate: '@date("T")',
-        },
-      ],
-    },
+    data,
   });
 });
 //单个博客
-Mock.mock(/^\/api\/blog\/[^/?][^/]+/, "get", function (options) {
+Mock.mock(/^\/api\/blog\/[^\?\/]+$/, "get", function (options) {
   const url = options.url;
   const reg = /[^\/]+/g;
   let a = reg.exec(url);

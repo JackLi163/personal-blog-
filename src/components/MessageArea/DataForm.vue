@@ -7,10 +7,9 @@
         maxlength="10"
         placeholder="用户昵称"
         v-model="dataForm.nickname"
+        ref="inputName"
       />
-      <span class="input-number"
-        >{{ dataForm.nickname ? dataForm.nickname.length : 0 }}/10</span
-      >
+      <span class="input-number">{{ dataForm.nickname ? dataForm.nickname.length : 0 }}/10</span>
       <div class="error">{{ error.nickname }}</div>
     </div>
     <div class="form-item" ref="formContainer">
@@ -19,10 +18,9 @@
         maxlength="300"
         placeholder="输入内容"
         v-model="dataForm.content"
+        ref="inputTextarea"
       ></textarea>
-      <span class="input-number"
-        >{{ dataForm.content ? dataForm.content.length : 0 }}/300</span
-      >
+      <span class="input-number">{{ dataForm.content ? dataForm.content.length : 0 }}/300</span>
       <div class="error">{{ error.content }}</div>
     </div>
     <button :disabled="isdisabled">
@@ -56,11 +54,15 @@ export default {
         return;
       }
       this.isdisabled = true;
+      this.$refs.inputName.disabled = true;
+      this.$refs.inputTextarea.disabled = true;
       this.$emit("submit", this.dataForm, (text) => {
         //当父组件处理完成后执行该函数
         this.isdisabled = false;
         this.dataForm.nickname = "";
         this.dataForm.content = "";
+        this.$refs.inputName.disabled = false;
+        this.$refs.inputTextarea.disabled = false;
         this.$showMessage({
           content: text,
           type: "success",

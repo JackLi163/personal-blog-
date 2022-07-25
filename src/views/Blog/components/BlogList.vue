@@ -46,7 +46,13 @@
         </div>
       </li>
     </ul>
-    <Pager :current="routeInfo.page" :total="data.total" :limit="routeInfo.limit" @pageChange="handlePageChange" />
+    <Empty v-if="data.rows.length === 0 && !isloading" />
+    <Pager
+      :current="routeInfo.page"
+      :total="data.total"
+      :limit="routeInfo.limit"
+      @pageChange="handlePageChange"
+    />
   </div>
 </template>
 
@@ -56,10 +62,12 @@ import mainScroll from "@/mixins/mainScroll";
 import * as blog from "@/api/blog";
 import { format } from "@/utils";
 import Pager from "@/components/Pager";
+import Empty from "@/components/Empty";
 export default {
-  mixins: [mixin({}), mainScroll("container")],
+  mixins: [mixin({ total: 0, rows: [] }), mainScroll("container")],
   components: {
     Pager,
+    Empty,
   },
   methods: {
     format,
