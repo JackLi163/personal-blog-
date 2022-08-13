@@ -11,5 +11,13 @@ export function getMessage(page = 1, limit = 10) {
 }
 // 提交评论
 export function postMessage(messageInfo) {
+  // return request({
+  //   url: "/api/message",
+  //   method: "post",
+  //   data: {
+  //     nickname,
+  //     content,
+  //   },
+  // });
   return request.post("/api/message", messageInfo);
 }

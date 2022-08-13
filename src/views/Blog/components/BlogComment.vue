@@ -29,7 +29,7 @@ export default {
   methods: {
     //   //加载远程数据
     async fetchData() {
-      return await getComments({ page: this.page++ });
+      return await getComments(this.page++, 10, this.$route.params.id);
     },
   },
 };

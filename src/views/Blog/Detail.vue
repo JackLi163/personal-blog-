@@ -41,7 +41,6 @@ export default {
     this.data = await getBlog(this.$route.params.id);
     this.isloading = false;
     if (!this.data) {
-      console.log(1);
       this.$router.push("/404");
       return;
     }

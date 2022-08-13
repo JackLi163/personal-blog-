@@ -4,7 +4,7 @@
       {{ title }} <span>({{ subTitle }})</span>
     </h2>
     <ul>
-      <li v-for="item in list" :key="item.id">
+      <li v-for="(item, i) in list" :key="i">
         <Avatar class="imgs" :size="50" :url="item.avatar" />
         <div class="main">
           <div class="top">

@@ -16,13 +16,11 @@ export default {
   },
   actions: {
     async fetchProject(ctx) {
-      console.log(1);
       if (ctx.state.data.length) {
         return;
       }
       ctx.commit("setLoading", true);
       const resp = await getProject();
-      console.log(resp);
       ctx.commit("setData", resp);
       ctx.commit("setLoading", false);
     },

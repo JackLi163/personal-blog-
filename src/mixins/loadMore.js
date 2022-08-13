@@ -1,3 +1,4 @@
+import route from "@/router/router"; //路由库
 export default function (fetch = {}, message = "成功") {
   const get = fetch.get;
   const post = fetch.post;
@@ -19,7 +20,7 @@ export default function (fetch = {}, message = "成功") {
       ismoreTotal() {
         const total = this.data.total || 0;
         const rows = this.data.rows || [];
-        return total < rows.length;
+        return total <= rows.length;
       },
     },
     methods: {
@@ -41,13 +42,17 @@ export default function (fetch = {}, message = "成功") {
           return;
         }
         this.isloading = true;
-        const repx = await get({ page: this.page++ });
+        const repx = await get(this.page++, 10, this.$route.params.id);
         this.data.rows = this.data.rows.concat(repx.rows);
         this.isloading = false;
       },
 
       async handleSelect(dataForm, callback) {
         const newData = await post(dataForm);
+        if (newData === null) {
+          callback("无效信息");
+          return false;
+        }
         this.data.rows.unshift(newData);
         this.data.total++;
         callback(message); //当得到远程数据后，调用子组件的回调函数

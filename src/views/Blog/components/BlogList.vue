@@ -72,7 +72,7 @@ export default {
   methods: {
     format,
     async fetchData() {
-      return await blog.getBlogs();
+      return await blog.getBlogs({ page: this.routeInfo.page });
     },
     handlePageChange(newPage) {
       const query = {

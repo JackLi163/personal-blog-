@@ -7,7 +7,7 @@ export async function getBlogs(option = {}) {
   const page = option.page || 1;
   const limit = option.limit || 10;
   const categoryid = option.categoryid || -1;
-  return await request.get("/api/blog?page", {
+  return await request.get("/api/blog", {
     params: {
       // 当前页码
       page,
@@ -26,6 +26,7 @@ export async function getBlog(id) {
 
 // 提交评论
 export async function postComments(commentsInfo) {
+  console.log(commentsInfo);
   return await request.post("/api/comment", commentsInfo);
 }
 

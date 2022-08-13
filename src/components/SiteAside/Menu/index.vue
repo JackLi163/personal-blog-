@@ -1,7 +1,13 @@
 <template>
   <ul class="menu-container">
     <li v-for="(item, i) in list" :key="i">
-      <RouterLink class="a" :to="{ name: item.name }" :exact="item.exact" active-class="selected" exact-active-class="">
+      <RouterLink
+        class="a"
+        :to="{ name: item.name }"
+        :exact="item.exact"
+        active-class="selected"
+        exact-active-class=""
+      >
         <Icon :type="item.icon" />
         <span>{{ item.text }}</span>
       </RouterLink>
@@ -51,17 +57,6 @@ export default {
       ],
     };
   },
-  // methods: {
-  //   UpdataSelectUrl(item) {
-  //     const pathname = location.pathname.toLowerCase();
-  //     const newpathname = item.url;
-  //     if (item.isblog) {
-  //       return pathname.startsWith(newpathname);
-  //     } else if (newpathname === pathname) {
-  //       return true;
-  //     }
-  //   },
-  // },
 };
 </script>
 

@@ -5,12 +5,10 @@ import { titleController } from "@/utils";
 if (!window.VueRouter) {
   Vue.use(VueRouter);
 }
-
 const route = new VueRouter({
   routes,
   mode: "history",
 });
-
 export default route;
 route.afterEach((to) => {
   if (to.meta.title) {

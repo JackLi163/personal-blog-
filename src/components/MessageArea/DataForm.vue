@@ -53,6 +53,7 @@ export default {
       if (!this.dataForm.nickname || !this.dataForm.content) {
         return;
       }
+      this.$route.params.id ? (this.dataForm.blogId = this.$route.params.id) : "";
       this.isdisabled = true;
       this.$refs.inputName.disabled = true;
       this.$refs.inputTextarea.disabled = true;
@@ -63,6 +64,9 @@ export default {
         this.dataForm.content = "";
         this.$refs.inputName.disabled = false;
         this.$refs.inputTextarea.disabled = false;
+        if (text === "无效信息") {
+          return false;
+        }
         this.$showMessage({
           content: text,
           type: "success",

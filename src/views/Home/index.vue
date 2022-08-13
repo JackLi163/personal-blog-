@@ -20,7 +20,11 @@
       <Icon type="arrowUp" />
     </div>
     <!-- 向下翻页 -->
-    <div v-show="index < data.length - 1" class="arrow-down arrow" @click="changeIndexNumber(index + 1)">
+    <div
+      v-show="index < data.length - 1"
+      class="arrow-down arrow"
+      @click="changeIndexNumber(index + 1)"
+    >
       <Icon type="arrowDown" />
     </div>
     <!-- 生成指示器 -->
@@ -32,6 +36,7 @@
         @click="changeIndexNumber(i)"
       ></span>
     </div>
+    <Empty type="arrowDown" v-if="data.length === 0 && !isloading" />
   </div>
 </template>
 
@@ -39,10 +44,12 @@
 import Icon from "@/components/Icon";
 import Carouselitem from "./Carouselitem";
 import { mapState } from "vuex";
+import Empty from "@/components/Empty";
 export default {
   components: {
     Carouselitem,
     Icon,
+    Empty,
   },
   data() {
     return {
@@ -92,7 +99,9 @@ export default {
       } else if (e.deltaY > 20) {
         this.index++;
         //判读index值是否大于data.length，若是的话将index置为data.length，若不是则将锁开启，约束滚轮事件
-        this.index > this.data.length - 1 ? (this.index = this.data.length - 1) : (this.switching = true);
+        this.index > this.data.length - 1
+          ? (this.index = this.data.length - 1)
+          : (this.switching = true);
       }
     },
   },

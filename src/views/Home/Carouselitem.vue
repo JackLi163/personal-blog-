@@ -53,31 +53,19 @@ export default {
       // 计算图片的最新位置，公式为鼠标相对于图片父元素的位置/图片父元素的宽度或高度*图片宽度或高度=图片的新位置
       this.imgPositionX =
         (-(e.clientX - domToLeft) / this.$refs.containerSize.clientWidth) *
-          -(
-            this.$refs.containerSize.clientWidth -
-            this.$refs.imgSize.$el.clientWidth
-          ) +
+          -(this.$refs.containerSize.clientWidth - this.$refs.imgSize.$el.clientWidth) +
         "px";
       this.imgPositionY =
         (-(e.clientY - domToTop) / this.$refs.containerSize.clientHeight) *
-          -(
-            this.$refs.containerSize.clientHeight -
-            this.$refs.imgSize.$el.clientHeight
-          ) +
+          -(this.$refs.containerSize.clientHeight - this.$refs.imgSize.$el.clientHeight) +
         "px";
     },
     //设置图片居中
     setImgCenter() {
       this.imgPositionX =
-        (this.$refs.containerSize.clientWidth -
-          this.$refs.imgSize.$el.clientWidth) /
-          2 +
-        "px";
+        (this.$refs.containerSize.clientWidth - this.$refs.imgSize.$el.clientWidth) / 2 + "px";
       this.imgPositionY =
-        (this.$refs.containerSize.clientHeight -
-          this.$refs.imgSize.$el.clientHeight) /
-          2 +
-        "px";
+        (this.$refs.containerSize.clientHeight - this.$refs.imgSize.$el.clientHeight) / 2 + "px";
     },
     // 设置文字的动画效果
     setTextAnimation() {

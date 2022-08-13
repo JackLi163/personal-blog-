@@ -19,7 +19,8 @@ export default {
         return;
       }
       ctx.commit("setLoading", true);
-      ctx.commit("setData", await getBanner());
+      const data = await getBanner();
+      ctx.commit("setData", data);
       ctx.commit("setLoading", false);
     },
   },

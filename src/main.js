@@ -3,7 +3,7 @@ import App from "./App.vue";
 import "./styles/globel.less"; //公共样式
 import router from "./router"; //路由库
 import { showMessage } from "./utils"; //工具库
-import "./mock";
+// import "./mock";
 import store from "./store";
 import "./directives/loading"; //自定义指令loading全局注册
 import eventBus from "./eventBus"; //事件总线
